@@ -6,7 +6,7 @@ export default function User({ details }) {
   }
 
   return (
-    <div className='friend container'>
+    <div className='friend-container'>
       <h2>
         {details.name
           .split(' ')

@@ -80,7 +80,7 @@ export default function App() {
   }, [formValues]);
 
   return (
-    <div>
+    <div class='app-container'>
       <h1>User Onboarding</h1>
       <Form
         values={formValues}
@@ -89,10 +89,12 @@ export default function App() {
         disabled={disabled}
         errors={formErrors}
       />
-
-      {users.map((user) => {
-        return <User key={user.id} details={user} />;
-      })}
+      <div class='container'>
+        <h2 className='title'>Users</h2>
+        {users.map((user) => {
+          return <User key={user.id} details={user} />;
+        })}
+      </div>
     </div>
   );
 }
