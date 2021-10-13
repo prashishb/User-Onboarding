@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as yup from 'yup';
 import schema from '../validation/formSchema';
 import Form from './Form';
+import User from './User';
 
 // Initial Form State
 const initialFormValues = {
@@ -30,14 +31,12 @@ export default function App() {
   const [disabled, setDisabled] = useState(initialDisabled);
   const [users, setUsers] = useState(initialUsers);
 
-  const formSubmit = () => {};
-
   // Helpers
   const postNewUser = (newUser) => {
     axios
       .post('https://reqres.in/api/users', newUser)
       .then((res) => {
-        console.log(res);
+        setUsers([res.data, ...users]);
       })
       .catch((err) => {
         console.error(err);
@@ -62,6 +61,16 @@ export default function App() {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  const formSubmit = () => {
+    const newUser = {
+      name: formValues.name,
+      email: formValues.email.trim(),
+      password: formValues.password.trim(),
+      tos: formValues.tos,
+    };
+    postNewUser(newUser);
+  };
+
   // Side effects: Enable button when all form criteria met
   useEffect(() => {
     schema.isValid(formValues).then((valid) => setDisabled(!valid));
@@ -77,6 +86,10 @@ export default function App() {
         disabled={disabled}
         errors={formErrors}
       />
+
+      {users.map((user) => {
+        return <User key={user.id} details={user} />;
+      })}
     </div>
   );
 }
