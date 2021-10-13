@@ -17,6 +17,11 @@ export default function Form(props) {
   return (
     <form className='form container' onSubmit={onSubmit}>
       <div className='form-field'>
+        <div className='errors'>
+          <div>{errors.name}</div>
+          <div>{errors.email}</div>
+          <div>{errors.password}</div>
+        </div>
         <label>
           Name:
           <input

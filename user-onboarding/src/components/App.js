@@ -20,6 +20,7 @@ const InitialFormErrors = {
 };
 
 //Initial Submit Button State
+const initialUsers = [];
 const initialDisabled = true;
 
 export default function App() {
@@ -27,13 +28,39 @@ export default function App() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(InitialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
-
-  // Event Handlers
-  const inputChange = (name, value) => {
-    setFormValues({ ...formValues, [name]: value });
-  };
+  const [users, setUsers] = useState(initialUsers);
 
   const formSubmit = () => {};
+
+  // Helpers
+  const postNewUser = (newUser) => {
+    axios
+      .post('https://reqres.in/api/users', newUser)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setFormValues(initialFormValues);
+      });
+  };
+
+  // Event Handlers
+
+  const validate = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => setFormErrors({ ...formErrors, [name]: '' }))
+      .catch((err) => setFormErrors({ ...formErrors, [name]: err.errors[0] }));
+  };
+
+  const inputChange = (name, value) => {
+    validate(name, value);
+    setFormValues({ ...formValues, [name]: value });
+  };
 
   return (
     <div>
@@ -43,6 +70,7 @@ export default function App() {
         change={inputChange}
         submit={formSubmit}
         disabled={disabled}
+        errors={formErrors}
       />
     </div>
   );
