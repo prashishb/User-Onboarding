@@ -10,6 +10,7 @@ const initialFormValues = {
   name: '',
   email: '',
   password: '',
+  role: '',
   tos: false,
 };
 
@@ -18,6 +19,7 @@ const InitialFormErrors = {
   name: '',
   email: '',
   password: '',
+  role: '',
 };
 
 //Initial Submit Button State
@@ -63,9 +65,10 @@ export default function App() {
 
   const formSubmit = () => {
     const newUser = {
-      name: formValues.name,
+      name: formValues.name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
+      role: formValues.role.trim(),
       tos: formValues.tos,
     };
     postNewUser(newUser);
@@ -78,7 +81,7 @@ export default function App() {
 
   return (
     <div>
-      <h1>App</h1>
+      <h1>User Onboarding</h1>
       <Form
         values={formValues}
         change={inputChange}

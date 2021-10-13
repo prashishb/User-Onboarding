@@ -15,6 +15,7 @@ export default function User({ details }) {
       </h2>
       <p>Email: {details.email}</p>
       <p>Password: {details.password}</p>
+      <p>Role: {details.role}</p>
       <p>ToS: {details.tos ? '✔️' : '❌'}</p>
     </div>
   );

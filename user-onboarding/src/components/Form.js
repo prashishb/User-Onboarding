@@ -21,6 +21,7 @@ export default function Form(props) {
           <div>{errors.name}</div>
           <div>{errors.email}</div>
           <div>{errors.password}</div>
+          <div>{errors.role}</div>
         </div>
         <label>
           Name:
@@ -50,6 +51,23 @@ export default function Form(props) {
             value={values.password}
             onChange={onChange}
           />
+        </label>
+        <label>
+          Role:
+          <select name='role' value={values.role} onChange={onChange}>
+            <option value=''>---- Select a Role ----</option>
+            <option value='Project Manager'>Project Manager</option>
+            <option value='Product Lead'>Product Owner</option>
+            <option value='Team Lead'>Team Lead</option>
+            <option value='Tech Lead'>Tech Lead</option>
+            <option value='Full-Stack Developer'>Full-Stack Developer</option>
+            <option value='Back-End Developer'>Back-End Developer</option>
+            <option value='Front-End Developer'>Front-End Developer</option>
+            <option value='QA Lead'>QA Lead</option>
+            <option value='QA Engineer'>QA Engineer</option>
+            <option value='UI Designer'>UI Designer</option>
+            <option value='UX Designer'>UX Designer</option>
+          </select>
         </label>
         <label>
           Terms Of Service:
