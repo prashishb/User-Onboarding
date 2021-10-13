@@ -77,7 +77,7 @@ export default function App() {
   // Side effects: Enable button when all form criteria met
   useEffect(() => {
     schema.isValid(formValues).then((valid) => setDisabled(!valid));
-  });
+  }, [formValues]);
 
   return (
     <div>
