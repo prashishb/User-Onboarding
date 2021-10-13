@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as yup from 'yup';
 import schema from '../validation/formSchema';
@@ -61,6 +61,11 @@ export default function App() {
     validate(name, value);
     setFormValues({ ...formValues, [name]: value });
   };
+
+  // Side effects: Enable button when all form criteria met
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => setDisabled(!valid));
+  });
 
   return (
     <div>
