@@ -108,6 +108,14 @@ button:hover {
   box-shadow: 0 8px 6px -6px hsla(0, 0%, 0%, 0.3);
 }
 
+button:disabled,
+button[disabled] {
+  background-color: transparent;
+  color: #ff0072;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .errors {
   margin: 8px;
   font-size: 0.7em;
